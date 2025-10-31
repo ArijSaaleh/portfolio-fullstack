@@ -30,8 +30,19 @@ interface Project {
   id: number
   title: string
   description: string
+  challenge?: string
+  contribution?: string
   technologies: string[]
   thumbnail: string
+  heroImage?: string
+  videoUrl?: string
+  githubUrl?: string
+  liveUrl?: string
+  accuracy?: string
+  speed?: string
+  images?: string[]
+  startDate?: string
+  endDate?: string
   published: boolean
 }
 
@@ -1023,13 +1034,133 @@ export default function AdminDashboard() {
                       />
                     </div>
                     <div>
-                      <label className="text-sm font-medium mb-2 block">Technologies (comma-separated)</label>
+                      <label className="text-sm font-medium mb-2 block">Challenge</label>
+                      <Textarea 
+                        value={formData.challenge || ''} 
+                        onChange={(e) => setFormData({...formData, challenge: e.target.value})}
+                        placeholder="What problem did this project solve?"
+                        rows={3}
+                        className="text-base"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium mb-2 block">Your Contribution</label>
+                      <Textarea 
+                        value={formData.contribution || ''} 
+                        onChange={(e) => setFormData({...formData, contribution: e.target.value})}
+                        placeholder="What was your role and contribution to this project?"
+                        rows={3}
+                        className="text-base"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium mb-2 block">Technologies (comma-separated) *</label>
                       <Input 
                         value={formData.technologies || ''} 
                         onChange={(e) => setFormData({...formData, technologies: e.target.value})}
                         placeholder="React, Node.js, TypeScript, PostgreSQL"
                         className="text-base"
                       />
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="text-sm font-medium mb-2 block">Thumbnail URL *</label>
+                        <Input 
+                          value={formData.thumbnail || ''} 
+                          onChange={(e) => setFormData({...formData, thumbnail: e.target.value})}
+                          placeholder="https://example.com/thumbnail.jpg"
+                          className="text-base"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-sm font-medium mb-2 block">Hero Image URL</label>
+                        <Input 
+                          value={formData.heroImage || ''} 
+                          onChange={(e) => setFormData({...formData, heroImage: e.target.value})}
+                          placeholder="https://example.com/hero.jpg"
+                          className="text-base"
+                        />
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-3 gap-4">
+                      <div>
+                        <label className="text-sm font-medium mb-2 block">GitHub URL</label>
+                        <Input 
+                          value={formData.githubUrl || ''} 
+                          onChange={(e) => setFormData({...formData, githubUrl: e.target.value})}
+                          placeholder="https://github.com/user/repo"
+                          className="text-base"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-sm font-medium mb-2 block">Live URL</label>
+                        <Input 
+                          value={formData.liveUrl || ''} 
+                          onChange={(e) => setFormData({...formData, liveUrl: e.target.value})}
+                          placeholder="https://project-demo.com"
+                          className="text-base"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-sm font-medium mb-2 block">Video URL</label>
+                        <Input 
+                          value={formData.videoUrl || ''} 
+                          onChange={(e) => setFormData({...formData, videoUrl: e.target.value})}
+                          placeholder="https://youtube.com/watch?v=..."
+                          className="text-base"
+                        />
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="text-sm font-medium mb-2 block">Accuracy/Performance Metric</label>
+                        <Input 
+                          value={formData.accuracy || ''} 
+                          onChange={(e) => setFormData({...formData, accuracy: e.target.value})}
+                          placeholder="95% accuracy"
+                          className="text-base"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-sm font-medium mb-2 block">Speed/Efficiency Metric</label>
+                        <Input 
+                          value={formData.speed || ''} 
+                          onChange={(e) => setFormData({...formData, speed: e.target.value})}
+                          placeholder="2x faster"
+                          className="text-base"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium mb-2 block">Additional Images (comma-separated URLs)</label>
+                      <Textarea 
+                        value={formData.images || ''} 
+                        onChange={(e) => setFormData({...formData, images: e.target.value})}
+                        placeholder="https://example.com/img1.jpg, https://example.com/img2.jpg"
+                        rows={2}
+                        className="text-base"
+                      />
+                      <p className="text-xs text-muted-foreground mt-1">Separate multiple image URLs with commas</p>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="text-sm font-medium mb-2 block">Start Date</label>
+                        <Input 
+                          type="date"
+                          value={formData.startDate || ''} 
+                          onChange={(e) => setFormData({...formData, startDate: e.target.value})}
+                          className="text-base"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-sm font-medium mb-2 block">End Date</label>
+                        <Input 
+                          type="date"
+                          value={formData.endDate || ''} 
+                          onChange={(e) => setFormData({...formData, endDate: e.target.value})}
+                          className="text-base"
+                        />
+                      </div>
                     </div>
                     <div className="flex items-center gap-2">
                       <input 
