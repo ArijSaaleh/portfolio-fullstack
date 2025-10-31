@@ -146,7 +146,24 @@ export default function AdminDashboard() {
     setSelectedItem(null)
     // Initialize empty form based on section
     if (section === 'projects') {
-      setFormData({ title: '', description: '', technologies: '', published: true })
+      setFormData({ 
+        title: '', 
+        description: '', 
+        challenge: '',
+        contribution: '',
+        technologies: '', 
+        thumbnail: '',
+        heroImage: '',
+        videoUrl: '',
+        githubUrl: '',
+        liveUrl: '',
+        accuracy: '',
+        speed: '',
+        images: '',
+        startDate: '',
+        endDate: '',
+        published: true 
+      })
     } else if (section === 'blogs') {
       setFormData({ 
         title: '', 
@@ -176,8 +193,20 @@ export default function AdminDashboard() {
     if (activeSection === 'projects') {
       setFormData({ 
         title: item.title, 
-        description: item.description, 
+        description: item.description,
+        challenge: item.challenge || '',
+        contribution: item.contribution || '',
         technologies: item.technologies?.join(', ') || '',
+        thumbnail: item.thumbnail || '',
+        heroImage: item.heroImage || '',
+        videoUrl: item.videoUrl || '',
+        githubUrl: item.githubUrl || '',
+        liveUrl: item.liveUrl || '',
+        accuracy: item.accuracy || '',
+        speed: item.speed || '',
+        images: item.images?.join(', ') || '',
+        startDate: item.startDate || '',
+        endDate: item.endDate || '',
         published: item.published 
       })
     } else if (activeSection === 'blogs') {
@@ -249,8 +278,15 @@ export default function AdminDashboard() {
       let dataToSend = { ...formData }
       
       // Convert comma-separated strings to arrays
-      if (activeSection === 'projects' && formData.technologies) {
-        dataToSend.technologies = formData.technologies.split(',').map((t: string) => t.trim()).filter((t: string) => t)
+      if (activeSection === 'projects') {
+        if (formData.technologies) {
+          dataToSend.technologies = formData.technologies.split(',').map((t: string) => t.trim()).filter((t: string) => t)
+        }
+        if (formData.images) {
+          dataToSend.images = formData.images.split(',').map((i: string) => i.trim()).filter((i: string) => i)
+        } else {
+          dataToSend.images = []
+        }
       }
       
       if (activeSection === 'achievements' && formData.images) {

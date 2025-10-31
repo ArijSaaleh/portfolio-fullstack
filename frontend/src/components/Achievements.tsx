@@ -27,6 +27,26 @@ export default function Achievements() {
     fetchAchievements()
   }, [])
 
+  // Convert Google Drive URL to direct image URL
+  const getImageUrl = (url: string) => {
+    if (!url) return url;
+    
+    // Check if it's a Google Drive link
+    const driveMatch = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+    if (driveMatch) {
+      // Convert to direct image URL
+      return `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=w1000`;
+    }
+    
+    // Check if it's already a direct link or thumbnail link
+    if (url.includes('drive.google.com/thumbnail') || url.includes('drive.google.com/uc?')) {
+      return url;
+    }
+    
+    // Return original URL for other sources
+    return url;
+  };
+
   const fetchAchievements = async () => {
     try {
       const response = await axios.get(`${API_URL}/api/achievements`)
@@ -115,7 +135,7 @@ export default function Achievements() {
               {achievement.images && achievement.images.length > 0 && (
                 <div className="aspect-video overflow-hidden bg-muted relative group">
                   <img
-                    src={achievement.images[currentImageIndex[achievement.id] || 0]}
+                    src={getImageUrl(achievement.images[currentImageIndex[achievement.id] || 0])}
                     alt={achievement.title}
                     className="w-full h-full object-cover transition-transform"
                   />
