@@ -48,6 +48,7 @@ interface Experience {
   id: number
   company: string
   position: string
+  location?: string
   startDate: string
   endDate?: string
   description: string
@@ -150,7 +151,7 @@ export default function AdminDashboard() {
         published: true 
       })
     } else if (section === 'experiences') {
-      setFormData({ company: '', companyLogo: '', position: '', startDate: '', endDate: '', description: '' })
+      setFormData({ company: '', companyLogo: '', position: '', location: '', startDate: '', endDate: '', description: '' })
     } else if (section === 'achievements') {
       setFormData({ title: '', category: 'award', date: '', description: '', images: '', videoUrl: '', link: '', published: true })
     }
@@ -186,10 +187,11 @@ export default function AdminDashboard() {
       setFormData({ 
         company: item.company,
         companyLogo: item.companyLogo || '',
-        position: item.position, 
+        position: item.position,
+        location: item.location || '',
         startDate: item.startDate,
         endDate: item.endDate || '',
-        description: item.description 
+        description: item.description
       })
     } else if (activeSection === 'achievements') {
       setFormData({ 
@@ -1180,14 +1182,25 @@ export default function AdminDashboard() {
                         />
                       </div>
                     </div>
-                    <div>
-                      <label className="text-sm font-medium mb-2 block">Position *</label>
-                      <Input 
-                        value={formData.position || ''} 
-                        onChange={(e) => setFormData({...formData, position: e.target.value})}
-                        placeholder="Job title"
-                        className="text-base"
-                      />
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="text-sm font-medium mb-2 block">Position *</label>
+                        <Input 
+                          value={formData.position || ''} 
+                          onChange={(e) => setFormData({...formData, position: e.target.value})}
+                          placeholder="Job title"
+                          className="text-base"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-sm font-medium mb-2 block">Location</label>
+                        <Input 
+                          value={formData.location || ''} 
+                          onChange={(e) => setFormData({...formData, location: e.target.value})}
+                          placeholder="City, Country"
+                          className="text-base"
+                        />
+                      </div>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
