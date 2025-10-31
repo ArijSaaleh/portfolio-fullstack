@@ -8,6 +8,7 @@ import ShareButtons from "../components/ShareButtons";
 import SEOHead from "../components/SEOHead";
 import StructuredData from "../components/StructuredData";
 import { usePageTracking, trackContentView } from "../hooks/useAnalytics";
+import { API_URL } from "../config";
 
 interface Blog {
   id: number;
@@ -63,7 +64,7 @@ export default function BlogDetailPage() {
 
   const fetchBlog = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/blogs`);
+      const response = await axios.get(`${API_URL}/api/blogs`);
       const foundBlog = response.data.find((b: Blog) => b.slug === slug);
 
       if (foundBlog) {

@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import axios from 'axios'
+import { API_URL } from '../config'
 
 export const usePageTracking = () => {
   const location = useLocation()
@@ -9,7 +10,7 @@ export const usePageTracking = () => {
     // Track page view
     const trackPageView = async () => {
       try {
-        await axios.post('http://localhost:3000/api/analytics/page-view', {
+        await axios.post(`${API_URL}/api/analytics/page-view`, {
           page: location.pathname,
           referrer: document.referrer || null
         })
@@ -25,7 +26,7 @@ export const usePageTracking = () => {
 
 export const trackContentView = async (contentType: 'project' | 'blog' | 'achievement', contentId: number) => {
   try {
-    await axios.post('http://localhost:3000/api/analytics/content-view', {
+    await axios.post(`${API_URL}/api/analytics/content-view`, {
       contentType,
       contentId
     })

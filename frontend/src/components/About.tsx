@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Cpu, Cloud, Hammer, GitBranch, Code2, Zap, Award, Lightbulb, Target } from "lucide-react"
 import FadeIn from "./animations/FadeIn"
 import axios from "axios"
+import { API_URL } from "../config"
 
 interface Project {
   id: number
@@ -30,8 +31,8 @@ export default function About() {
   const fetchStats = async () => {
     try {
       const [projectsRes, experiencesRes] = await Promise.all([
-        axios.get('http://localhost:3000/api/projects'),
-        axios.get('http://localhost:3000/api/experiences')
+        axios.get(`${API_URL}/api/projects`),
+        axios.get(`${API_URL}/api/experiences`)
       ])
 
       const projects: Project[] = projectsRes.data.filter((p: Project) => p.published)

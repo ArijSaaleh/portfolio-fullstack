@@ -4,6 +4,7 @@ import { Button } from "../components/ui/button"
 import { Input } from "../components/ui/input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card"
 import axios from "axios"
+import { API_URL } from "../config"
 
 export default function AdminLogin() {
   const navigate = useNavigate()
@@ -13,7 +14,7 @@ export default function AdminLogin() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/login', credentials)
+      const response = await axios.post(`${API_URL}/api/auth/login`, credentials)
       localStorage.setItem('token', response.data.token)
       navigate('/admin/dashboard')
     } catch (err) {

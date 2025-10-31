@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 import { Button } from './ui/button'
 import { Award, Calendar, ExternalLink, Play, ChevronLeft, ChevronRight } from 'lucide-react'
+import { API_URL } from '../config'
 
 interface Achievement {
   id: number
@@ -28,7 +29,7 @@ export default function Achievements() {
 
   const fetchAchievements = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/achievements')
+      const response = await axios.get(`${API_URL}/api/achievements`)
       const published = response.data.filter((a: Achievement) => a.published)
       setAchievements(published)
     } catch (error) {

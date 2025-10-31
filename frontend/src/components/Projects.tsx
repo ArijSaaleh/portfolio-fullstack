@@ -8,6 +8,7 @@ import SkeletonCard from "./loaders/SkeletonCard"
 import FadeIn from "./animations/FadeIn"
 import axios from "axios"
 import { Github, ExternalLink } from "lucide-react"
+import { API_URL } from "../config"
 
 interface Project {
   id: number
@@ -32,7 +33,7 @@ export default function Projects() {
 
   const fetchProjects = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/projects')
+      const response = await axios.get(`${API_URL}/api/projects`)
       // Filter only published projects
       const publishedProjects = response.data.filter((p: Project) => p.published)
       setProjects(publishedProjects)

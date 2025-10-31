@@ -10,6 +10,7 @@ import SEOHead from "../components/SEOHead"
 import StructuredData from "../components/StructuredData"
 import axios from "axios"
 import { usePageTracking, trackContentView } from "../hooks/useAnalytics"
+import { API_URL } from "../config"
 
 interface ProjectDetail {
   id: number
@@ -46,7 +47,7 @@ export default function ProjectDetailPage() {
 
   const fetchProjectDetail = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/projects/${id}`)
+      const response = await axios.get(`${API_URL}/api/projects/${id}`)
       setProject(response.data)
     } catch (error) {
       console.error('Error fetching project detail:', error)

@@ -8,6 +8,7 @@ import SkeletonCard from "./loaders/SkeletonCard"
 import FadeIn from "./animations/FadeIn"
 import axios from "axios"
 import { Calendar, Clock } from "lucide-react"
+import { API_URL } from "../config"
 
 interface BlogPost {
   id: number
@@ -52,7 +53,7 @@ export default function Blog() {
 
   const fetchPosts = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/blogs')
+      const response = await axios.get(`${API_URL}/api/blogs`)
       // Filter only published posts
       const publishedPosts = response.data.filter((post: BlogPost) => post.published)
       setPosts(publishedPosts)

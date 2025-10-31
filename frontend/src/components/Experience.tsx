@@ -8,6 +8,7 @@ import {
   CardTitle,
 } from "./ui/card";
 import { Briefcase, Calendar, MapPin } from "lucide-react";
+import { API_URL } from "../config";
 
 interface Experience {
   id: number;
@@ -32,7 +33,7 @@ export default function Experience() {
 
   const fetchExperiences = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/experiences");
+      const response = await axios.get(`${API_URL}/api/experiences`);
       setExperiences(response.data);
     } catch (error) {
       console.error("Error fetching experiences:", error);

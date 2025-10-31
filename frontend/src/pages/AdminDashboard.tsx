@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Button } from "../components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card"
+import { API_URL } from "../config"
 import { 
   LayoutDashboard, 
   FolderKanban, 
@@ -103,11 +104,11 @@ export default function AdminDashboard() {
       const headers = { Authorization: `Bearer ${token}` }
       
       const [projectsRes, blogsRes, experiencesRes, achievementsRes, messagesRes] = await Promise.all([
-        axios.get('http://localhost:3000/api/projects', { headers }),
-        axios.get('http://localhost:3000/api/blogs', { headers }),
-        axios.get('http://localhost:3000/api/experiences', { headers }),
-        axios.get('http://localhost:3000/api/achievements', { headers }),
-        axios.get('http://localhost:3000/api/contact', { headers })
+        axios.get(`${API_URL}/api/projects`, { headers }),
+        axios.get(`${API_URL}/api/blogs`, { headers }),
+        axios.get(`${API_URL}/api/experiences`, { headers }),
+        axios.get(`${API_URL}/api/achievements`, { headers }),
+        axios.get(`${API_URL}/api/contact`, { headers })
       ])
 
       setProjects(projectsRes.data)
@@ -217,7 +218,7 @@ export default function AdminDashboard() {
     try {
       const token = localStorage.getItem('token')
       const headers = { Authorization: `Bearer ${token}` }
-      await axios.delete(`http://localhost:3000/api/${section}/${id}`, { headers })
+      await axios.delete(`${API_URL}/api/${section}/${id}`, { headers })
       fetchStats()
     } catch (error) {
       console.error('Error deleting item:', error)
@@ -244,9 +245,9 @@ export default function AdminDashboard() {
       }
       
       if (modalType === 'add') {
-        await axios.post(`http://localhost:3000/api/${activeSection}`, dataToSend, { headers })
+        await axios.post(`${API_URL}/api/${activeSection}`, dataToSend, { headers })
       } else {
-        await axios.put(`http://localhost:3000/api/${activeSection}/${selectedItem.id}`, dataToSend, { headers })
+        await axios.put(`${API_URL}/api/${activeSection}/${selectedItem.id}`, dataToSend, { headers })
       }
       
       setShowModal(false)
