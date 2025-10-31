@@ -33,7 +33,7 @@ export default function BlogDetailPage() {
 
   usePageTracking();
 
-  // Convert Google Drive URL to embeddable format
+  // Convert Google Drive URL to embeddable format (for PDFs)
   const getEmbedUrl = (url: string) => {
     if (!url) return url;
     
@@ -45,6 +45,26 @@ export default function BlogDetailPage() {
     
     // Check if it's already a preview link
     if (url.includes('drive.google.com') && url.includes('/preview')) {
+      return url;
+    }
+    
+    // Return original URL for other sources
+    return url;
+  };
+
+  // Convert Google Drive URL to direct image URL (for thumbnails)
+  const getImageUrl = (url: string) => {
+    if (!url) return url;
+    
+    // Check if it's a Google Drive link
+    const driveMatch = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+    if (driveMatch) {
+      // Convert to direct image URL
+      return `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=w1000`;
+    }
+    
+    // Check if it's already a direct link or thumbnail link
+    if (url.includes('drive.google.com/thumbnail') || url.includes('drive.google.com/uc?')) {
       return url;
     }
     
@@ -161,7 +181,7 @@ export default function BlogDetailPage() {
         {blog.image && !blog.pdfUrl && (
           <div className="mb-8 rounded-lg overflow-hidden bg-muted">
             <img
-              src={blog.image}
+              src={getImageUrl(blog.image)}
               alt={blog.title}
               className="w-full h-[400px] object-cover"
             />

@@ -31,7 +31,7 @@ export default function Blog() {
   const [selectedType, setSelectedType] = useState("all")
   const [sortBy, setSortBy] = useState("date")
 
-  // Convert Google Drive URL to embeddable format
+  // Convert Google Drive URL to embeddable format (for PDFs)
   const getEmbedUrl = (url: string) => {
     if (!url) return url;
     
@@ -44,6 +44,26 @@ export default function Blog() {
       return url;
     }
     
+    return url;
+  };
+
+  // Convert Google Drive URL to direct image URL (for thumbnails)
+  const getImageUrl = (url: string) => {
+    if (!url) return url;
+    
+    // Check if it's a Google Drive link
+    const driveMatch = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+    if (driveMatch) {
+      // Convert to direct image URL
+      return `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=w1000`;
+    }
+    
+    // Check if it's already a direct link or thumbnail link
+    if (url.includes('drive.google.com/thumbnail') || url.includes('drive.google.com/uc?')) {
+      return url;
+    }
+    
+    // Return original URL for other sources
     return url;
   };
 
@@ -177,7 +197,7 @@ export default function Blog() {
                   <div className="aspect-video overflow-hidden bg-muted relative">
                     {post.thumbnail ? (
                       <img 
-                        src={post.thumbnail} 
+                        src={getImageUrl(post.thumbnail)} 
                         alt={post.title}
                         className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                       />
