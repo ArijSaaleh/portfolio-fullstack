@@ -45,6 +45,26 @@ export default function ProjectDetailPage() {
     }
   }, [project])
 
+  // Convert Google Drive URL to direct image URL
+  const getImageUrl = (url: string) => {
+    if (!url) return url;
+    
+    // Check if it's a Google Drive link
+    const driveMatch = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+    if (driveMatch) {
+      // Convert to direct image URL
+      return `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=w1000`;
+    }
+    
+    // Check if it's already a direct link or thumbnail link
+    if (url.includes('drive.google.com/thumbnail') || url.includes('drive.google.com/uc?')) {
+      return url;
+    }
+    
+    // Return original URL for other sources
+    return url;
+  };
+
   const fetchProjectDetail = async () => {
     try {
       const response = await axios.get(`${API_URL}/api/projects/${id}`)
@@ -168,7 +188,7 @@ export default function ProjectDetailPage() {
               </div>
             </div>
             <div>
-              <img src={project.heroImage} alt={project.title} className="w-full rounded-2xl shadow-md" />
+              <img src={getImageUrl(project.heroImage)} alt={project.title} className="w-full rounded-2xl shadow-md" />
             </div>
           </div>
         </div>
@@ -257,7 +277,7 @@ export default function ProjectDetailPage() {
                   {project.images.map((image, index) => (
                     <img 
                       key={index}
-                      src={image} 
+                      src={getImageUrl(image)} 
                       alt={`Project screenshot ${index + 1}`}
                       className="w-full h-24 object-cover rounded-lg shadow hover:scale-105 transition-transform cursor-pointer"
                     />

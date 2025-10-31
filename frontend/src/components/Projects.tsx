@@ -31,6 +31,26 @@ export default function Projects() {
     fetchProjects()
   }, [])
 
+  // Convert Google Drive URL to direct image URL
+  const getImageUrl = (url: string) => {
+    if (!url) return url;
+    
+    // Check if it's a Google Drive link
+    const driveMatch = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+    if (driveMatch) {
+      // Convert to direct image URL
+      return `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=w1000`;
+    }
+    
+    // Check if it's already a direct link or thumbnail link
+    if (url.includes('drive.google.com/thumbnail') || url.includes('drive.google.com/uc?')) {
+      return url;
+    }
+    
+    // Return original URL for other sources
+    return url;
+  };
+
   const fetchProjects = async () => {
     try {
       const response = await axios.get(`${API_URL}/api/projects`)
@@ -128,7 +148,7 @@ export default function Projects() {
                 <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 h-full flex flex-col hover:border-primary/50">
                   <div className="aspect-video overflow-hidden relative group">
                     <img 
-                      src={project.thumbnail} 
+                      src={getImageUrl(project.thumbnail)} 
                       alt={project.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
