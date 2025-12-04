@@ -21,5 +21,50 @@
     "startDate": "2024-01-01",
     "endDate": "2024-06-01",
     "published": true
+  },
+  {
+    "id": 2,
+    "title": "Admission interview AI assistant",
+    "description": "<p>Developed an application to manage reception functions and automate pre-admission interviews</p>",
+    "challenge": "The main challenge was to create an efficient solution to automate the numerous pre-admission interviews conducted daily at the university of ESPRIT.",
+    "contribution": "I developed the core algorithms and implemented the machine learning models that power the chatbot assistant. Additionally, I integrated the application with existing university systems to streamline the admission process.",
+    "technologies": ["React", "TypeScript", "Node.js"],
+    "thumbnail": "https://drive.google.com/file/d/1g5P6o0mtGiXUXNOUERczVaVxF12GvEMw/view?usp=drive_link",
+    "heroImage": "https://drive.google.com/file/d/1g5P6o0mtGiXUXNOUERczVaVxF12GvEMw/view?usp=drive_link",
+    "videoUrl": "https://drive.google.com/file/d/1g5P6o0mtGiXUXNOUERczVaVxF12GvEMw/view?usp=drive_link",
+    "githubUrl": "https://github.com/ArijSaaleh/admission_chat_ai",
+    "liveUrl": "https://drive.google.com/file/d/1g5P6o0mtGiXUXNOUERczVaVxF12GvEMw/view?usp=drive_link",
+    "accuracy": "85%",
+    "speed": "2x faster",
+    "images": [
+      "https://drive.google.com/file/d/1g5P6o0mtGiXUXNOUERczVaVxF12GvEMw/view?usp=drive_link",
+      "https://drive.google.com/file/d/1g5P6o0mtGiXUXNOUERczVaVxF12GvEMw/view?usp=drive_link"
+    ],
+    "startDate": "2023-01-01",
+    "endDate": "2023-07-01",
+    "published": true
+  }
+  ,
+  {
+    "id": 3,
+    "title": "Bionic Hand Prosthesis",
+    "description": "<p>This advanced prosthetic hand was meticulously designed and 3D printed, incorporating state-of-the-art technologies such as electromyography (EMG) sensors and servo-motors</p>",
+    "challenge": "The main challenge was to create an efficient prosthetic hand that responds accurately to muscle signals and movements after amputation.",
+    "contribution": "I led the development of the Bionic Hand, overseeing the design, 3D printing, and integration of EMG sensors and servo-motors. I also collaborated with a multidisciplinary team to ensure the prosthesis met functional and ergonomic standards.",
+    "technologies": ["EMG Sensors", "3D Printing", "Servo Motors"],
+    "thumbnail": "https://drive.google.com/file/d/1_pgZdM_3sckV93k5o-EVzAx3bMU85_24/view?usp=drive_link",
+    "heroImage": "https://drive.google.com/file/d/1_pgZdM_3sckV93k5o-EVzAx3bMU85_24/view?usp=drive_link",
+    "videoUrl": "https://drive.google.com/file/d/1_pgZdM_3sckV93k5o-EVzAx3bMU85_24/view?usp=drive_link",
+    "githubUrl": "https://github.com/ArijSaaleh/admission_chat_ai",
+    "liveUrl": "https://drive.google.com/file/d/1_pgZdM_3sckV93k5o-EVzAx3bMU85_24/view?usp=drive_link",
+    "accuracy": "85%",
+    "speed": "2x faster",
+    "images": [
+      "https://drive.google.com/file/d/1_pgZdM_3sckV93k5o-EVzAx3bMU85_24/view?usp=drive_link",
+      "https://drive.google.com/file/d/1_pgZdM_3sckV93k5o-EVzAx3bMU85_24/view?usp=drive_link"
+    ],
+    "startDate": "2020-02-01",
+    "endDate": "2020-06-19",
+    "published": true
   }
 ]

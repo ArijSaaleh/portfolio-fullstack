@@ -10,7 +10,7 @@
             "https://media.licdn.com/dms/image/v2/D4D2DAQEZCriucUO0og/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1710282670142?e=1765461600&v=beta&t=oy-LpUwkmAykSYLF-aOjtcUWDXxq-Ne-uYYtrbXShKA",
             "https://media.licdn.com/dms/image/v2/D4D2DAQHK-uvJ0p2Tug/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1710282679459?e=1765461600&v=beta&t=Vjm6DhLw-uPcsA6eijd90N53ylss2wWpHqM2uXEcp5A"
         ],
-        "videoUrl": "https://www.youtube.com/embed/example",
+        "videoUrl": "",
         "link": "https://www.tekiano.com/2022/10/13/orange-summer-challenge-2022-projet-perro-grand-vainqueur-de-la-12eme-edition/",
         "published": true
     },
@@ -25,8 +25,21 @@
             "https://media.licdn.com/dms/image/v2/D4D2DAQEDGruIyHi1jA/profile-treasury-image-shrink_8192_8192/profile-treasury-image-shrink_8192_8192/0/1710283009613?e=1765461600&v=beta&t=mWfJm1aN6LYSHnC_d83857AlTBBPTCahRPXOdnfwZCk",
             "https://media.licdn.com/dms/image/v2/D4D2DAQGL6-unmhDsBA/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1710282997838?e=1765461600&v=beta&t=-jjeTPge1_0nArlODEoQo6WOlNMaV7GQ9dOTCFHITdM"
         ],
-        "videoUrl": "https://www.youtube.com/embed/example",
-        "link": "https://hackathon-event.com",
+        "videoUrl": "",
+        "link": "",
+        "published": true
+    },
+    {
+        "id": 3,
+        "title": "Introduction to AWS Elastic file System",
+        "description": "Completed the AWS Elastic File System (EFS) introductory course on LinkedIn Learning",
+        "category": "certification",
+        "date": "2024-08-12",
+        "images": [
+            "https://drive.google.com/file/d/14sRdp9EeHG4eC-eLA26Ti02fNQYmpEvK/view?usp=sharing"]
+        ,
+        "videoUrl": "",
+        "link": "https://www.coursera.org/account/accomplishments/verify/IVL83ANKDNUE",
         "published": true
     }
 ]

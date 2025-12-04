@@ -55,20 +55,19 @@ export function resolveMediaUrl(url: string, options: MediaOptions = {}): string
  * Converts Google Drive file ID to accessible URL
  */
 function getDriveUrl(fileId: string, type: MediaType, size: string): string {
-  // For PDFs, use preview mode
+  // For PDFs, use preview mode for embedding
   if (type === 'pdf') {
     return `https://drive.google.com/file/d/${fileId}/preview`;
   }
 
-  // For images, use thumbnail API with size
-  const sizeMap: Record<string, string> = {
-    small: 'w400',
-    medium: 'w800',
-    large: 'w1000',
-    original: 'w2000'
-  };
+  // For videos, use preview mode as well
+  if (type === 'video') {
+    return `https://drive.google.com/file/d/${fileId}/preview`;
+  }
 
-  return `https://drive.google.com/thumbnail?id=${fileId}&sz=${sizeMap[size]}`;
+  // For images, use the download URL that works in img tags
+  // This URL directly serves the image file
+  return `https://lh3.googleusercontent.com/d/${fileId}`;
 }
 
 /**

@@ -1,16 +1,30 @@
 [
   {
     "id": 1,
-    "title": "Getting Started with React",
-    "slug": "getting-started-with-react",
-    "excerpt": "Learn the basics of React development",
-    "content": "<h2>Introduction</h2><p>React is a powerful library...</p>",
-    "thumbnail": "local:/images/blogs/react-thumb.jpg",
+    "title": "Linux vs Unix",
+    "slug": "linux-vs-unix",
+    "excerpt": "<p>A comprehensive comparison between Linux and Unix operating systems, exploring their origins, features, and use cases.</p>",
+    "content": "<h2>Introduction</h2><p>Linux and Unix are both powerful operating systems with distinct histories and features...</p>",
+    "thumbnail": "https://drive.google.com/file/d/1m-ghT9VLwJ1D8X4lOR41o4RLwQtlK4qX/view?usp=sharing",
     "type": "article",
     "readTime": "5 min read",
     "videoUrl": "",
-    "pdfUrl": "drive://1XYZ789ABC123DEF456GHI",
-    "publishedAt": "2024-01-15",
+    "pdfUrl": "https://drive.google.com/file/d/1c7E8Mw17DhtjwHBMqxUCks7QRFbC3psx/view?usp=sharing",
+    "publishedAt": "2023-10-15",
+    "published": true
+  },
+  {
+    "id": 2,
+    "title": "Linux image customization",
+    "slug": "linux-image-customization",
+    "excerpt": "<p>A detailed guide on customizing Linux images for various use cases.</p>",
+    "content": "<h2> 𝗘𝘃𝗲𝗿 𝘄𝗼𝗻𝗱𝗲𝗿𝗲𝗱 𝗵𝗼𝘄 𝗲𝗺𝗯𝗲𝗱𝗱𝗲𝗱 𝗟𝗶𝗻𝘂𝘅 𝘀𝘆𝘀𝘁𝗲𝗺𝘀 𝗮𝗿𝗲 𝗮𝗰𝘁𝘂𝗮𝗹𝗹𝘆 𝗯𝘂𝗶𝗹𝘁 𝘀𝘁𝗲𝗽 𝗯𝘆 𝘀𝘁𝗲𝗽?</h2>\n    <p>From picking the right build system, to configuring the kernel, adding your own services, and flashing it to real hardware… I broke down the full journey of creating a custom Linux image for embedded devices using simple illustrations, analogies, and clear steps 💡<br> Whether you're a student, junior engineer, or just curious about what's under the hood of embedded systems, this is for you!\n\n🧠 حتى كان عمرك ما خدمت باللينوكس، تنجم تفهم التصاور هاذم و تبدا تجرب وحدك.\n\n🎯 This is just the theory next, I’ll build an actual embedded Linux system using Yocto or Buildroot and share the full GitHub repo + demo.",
+    "thumbnail": "https://drive.google.com/file/d/11nV--8_i5_wmZB2WSXYb5lKjsudxX1WH/view?usp=sharing",
+    "type": "article",
+    "readTime": "5 min read",
+    "videoUrl": "",
+    "pdfUrl": "https://drive.google.com/file/d/11nV--8_i5_wmZB2WSXYb5lKjsudxX1WH/view?usp=sharing",
+    "publishedAt": "2025-10-15",
     "published": true
   }
 ]
