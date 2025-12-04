@@ -8,7 +8,7 @@ import FadeIn from "../components/animations/FadeIn"
 import ShareButtons from "../components/ShareButtons"
 import SEOHead from "../components/SEOHead"
 import StructuredData from "../components/StructuredData"
-import { usePageTracking, trackContentView } from "../hooks/useAnalytics"
+
 import { getProjectById, type Project } from "../services/dataService"
 import { resolveMediaUrl } from "../utils/mediaResolver"
 
@@ -17,17 +17,12 @@ export default function ProjectDetailPage() {
   const [project, setProject] = useState<Project | null>(null)
   const [loading, setLoading] = useState(true)
   
-  usePageTracking()
+  
 
   useEffect(() => {
     fetchProjectDetail()
   }, [id])
   
-  useEffect(() => {
-    if (project) {
-      trackContentView('project', project.id)
-    }
-  }, [project])
 
   const fetchProjectDetail = async () => {
     try {

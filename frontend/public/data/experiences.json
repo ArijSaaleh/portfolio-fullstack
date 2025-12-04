@@ -1,14 +1,146 @@
 [
-  {
-    "id": 1,
-    "company": "Tech Company Inc.",
-    "companyLogo": "local:/images/logos/company1.png",
-    "position": "Senior Software Engineer",
-    "location": "San Francisco, CA",
-    "startDate": "2022-01-01",
-    "endDate": "",
-    "current": true,
-    "description": "Led development of key features and mentored junior developers",
-    "skills": ["React", "Node.js", "TypeScript", "AWS"]
-  }
+    {
+        "id": 1,
+        "company": "IronHex",
+        "companyLogo": "https://www.ironhex-tech.com/logo.png",
+        "position": "Co-Founder & IoT Engineer",
+        "location": "Tunis, Tunisia",
+        "startDate": "2025-10-10",
+        "endDate": "",
+        "current": true,
+        "description": [
+            "Designing secure IoT prototypes using ESP32, embedded Linux, MQTT, and TLS",
+            "Developing embedded firmware for device connectivity, monitoring, and OTA updates",
+            "Creating backend services (Node.js + MQTT broker + Docker) for IoT data pipelines",
+            "Researching IoT vulnerabilities and cybersecurity frameworks",
+            "Building the technical foundation and architecture of the startup’s internal solutions",
+            "Preparing demo products for early-stage partnerships"
+        ],
+        "skills": [
+            "React",
+            "Node.js",
+            "TypeScript",
+            "AWS",
+            "MQTT",
+            "TLS",
+            "Docker"
+        ]
+    },
+    {
+        "id": 2,
+        "company": "Concentrix",
+        "companyLogo": "https://bsmedia.business-standard.com/_media/bs/img/article/2025-11/21/full/20251121165546.jpg",
+        "position": "Technical Support Specialist LOB Account & Payment in UBER",
+        "location": "Kram, Tunisia",
+        "startDate": "2025-05-16",
+        "endDate": "2025-08-06",
+        "current": false,
+        "description": [
+            "Processing a large volume of customer data related to accounts and payments.",
+            "Monitoring and reporting of performance indicators related to the user experience.",
+            "Continuously improving processes based on field customer feedback."
+        ],
+        "skills": [
+            "Customer Support",
+            "Data Analysis",
+            "Problem Solving"
+        ]
+    },
+    {
+        "id": 3,
+        "company": "Freelance",
+        "companyLogo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTL9sb2LvLJJOiwpQ1YUQ6_b6yVqWVwffJRZsHW_Lx6onGdPgYo0k7Gb2CFIcEDcDXvM_s&usqp=CAU",
+        "position": "Software Developer",
+        "location": "Remote",
+        "startDate": "2023-10-10",
+        "endDate": "2024-12-01",
+        "current": false,
+        "description": [
+            " Developping and maintaining firmware for microcontrollers using C/C++ for various embedded applications.",
+            "Designing and implementing basic communication protocols like UART, I2C, and SPI for sensor integration.",
+            "Implementing real-time data acquisition and processing for embedded systems.",
+            "Optimizing power consumption and memory usage in embedded software.",
+            "Working on small-scale IoT projects, including sensor data collection and wireless communication (using Wi-Fi or BLE)."
+        ],
+        "skills": [
+            "C/C++",
+            "UART",
+            "I2C",
+            "SPI",
+            "Wi-Fi",
+            "BLE",
+            "Bash Scripting",
+            "Yocto Project",
+            "Buildroot"
+        ]
+    },
+    {
+        "id": 4,
+        "company": "ESPRIT",
+        "companyLogo": "https://media.licdn.com/dms/image/v2/C4D0BAQE5RXDgS-RpXA/company-logo_200_200/company-logo_200_200/0/1630491756929/esprit_2_logo?e=2147483647&v=beta&t=SJN1xDMgxBaRrEIj6VSepEqxNXjOx_aKx5hJH-5uSBc",
+        "position": "Machine learning Intern & Mentor",
+        "location": "Ariana, Tunisia",
+        "startDate": "2023-01-09",
+        "endDate": "2023-08-21",
+        "current": false,
+        "description": [
+            "Developed an application to manage reception functions and automate pre-admission interviews.",
+            "Integrated a virtual chatbot to assist prospective students, improving response time by 40%.",
+            "Mentored a team of 5 interns on machine learning projects, enhancing their technical skills and project delivery."
+        ],
+        "skills": [
+            "Python",
+            "Machine Learning",
+            "Chatbot Development",
+            "Team Mentoring",
+            "Dialogflow",
+            "Rasa",
+            "Flask"
+        ]
+    },
+    {
+        "id": 5,
+        "company": "Orange Digital Center Tunisia",
+        "companyLogo": "https://univ-internationale.com/sites/default/files/orange-tunisie.png",
+        "position": "Embedded Software Intern",
+        "location": "LAC I, Tunisia",
+        "startDate": "2022-07-01",
+        "endDate": "2023-10-11",
+        "current": false,
+        "description": [
+            "Contributed to the realization of an IoT solution for the detection and prediction of forest fires propagation in real-time.",
+            "Designed pcb for the connected sensor nodes.",
+            "Ensured efficient power management through low latency communication provided by LoraWan connectivity.",
+            "Won the second prize at the Orange Summer Challenge 2022 under the name of FireFlow 🍑"
+        ],
+        "skills": [
+            "C/C++",
+            "ESP32",
+            "LoraWan",
+            "PCB Design",
+            "Power Management"
+        ]
+    }
+    ,
+    {
+        "id": 6,
+        "company": "Tasemco",
+        "companyLogo": "https://media.licdn.com/dms/image/v2/C4E0BAQGXz976y6BhTA/company-logo_200_200/company-logo_200_200/0/1631338712879?e=1766620800&v=beta&t=bJTBm47XqzGBiP-RIxPnm7AkNtq3S2vGLIrCxHjwdLg",
+        "position": "Embedded Software Intern",
+        "location": "Tunis, Tunisia",
+        "startDate": "2020-02-01",
+        "endDate": "2020-07-13",
+        "current": false,
+        "description": [
+            "For the successful completion of my graduation project, I led the development of a cutting-edge prototype: A Bionic Hand.",
+            "This advanced prosthetic hand was meticulously designed and 3D printed, incorporating state-of-the-art technologies such as electromyography (EMG) sensors and servo-motors.",
+            "The unique feature of this innovation lies in its ability to be controlled intuitively through muscle signals."
+        ],
+        "skills": [
+            "C/C++",
+            "EMG Sensors",
+            "3D Printing",
+            "Prosthetics Design"
+        ]
+    }
 ]

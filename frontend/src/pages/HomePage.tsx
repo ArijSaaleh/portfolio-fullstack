@@ -9,10 +9,9 @@ import Contact from "../components/Contact"
 import Footer from "../components/Footer"
 import SEOHead from "../components/SEOHead"
 import StructuredData from "../components/StructuredData"
-import { usePageTracking } from "../hooks/useAnalytics"
 
 export default function HomePage() {
-  usePageTracking()
+
   
   return (
     <div className="min-h-screen">

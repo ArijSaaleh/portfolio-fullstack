@@ -58,7 +58,7 @@ export default function Navbar() {
           >
             <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-primary/20 group-hover:border-primary transition-all">
               <img 
-                src="https://media.licdn.com/dms/image/v2/D4D03AQG3KVSzLBXgdw/profile-displayphoto-crop_800_800/B4DZl8u2zFIgAI-/0/1758734284772?e=1763596800&v=beta&t=5hx3wKRMCqgwzjAz8BeGej40vrgh9IRDO70bwsXh3oc"
+                src="https://media.licdn.com/dms/image/v2/D4D03AQG3KVSzLBXgdw/profile-displayphoto-crop_800_800/B4DZl8u2zFIgAI-/0/1758734284772?e=1766620800&v=beta&t=ojldDRpQ3bQ9WcIOSe82iGIV2S2DwSBmTUriUWGVtfw"
                 alt="Arij SALEH"
                 className="w-full h-full object-cover"
               />

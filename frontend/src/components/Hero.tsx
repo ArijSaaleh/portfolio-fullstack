@@ -60,7 +60,7 @@ export default function Hero() {
                 {/* Main circular image */}
                 <div className="relative rounded-full overflow-hidden shadow-2xl border-8 border-background aspect-square">
                   <img
-                    src="https://media.licdn.com/dms/image/v2/D4D03AQG3KVSzLBXgdw/profile-displayphoto-crop_800_800/B4DZl8u2zFIgAI-/0/1758734284772?e=1763596800&v=beta&t=5hx3wKRMCqgwzjAz8BeGej40vrgh9IRDO70bwsXh3oc"
+                    src="https://media.licdn.com/dms/image/v2/D4D03AQG3KVSzLBXgdw/profile-displayphoto-crop_800_800/B4DZl8u2zFIgAI-/0/1758734284772?e=1766620800&v=beta&t=ojldDRpQ3bQ9WcIOSe82iGIV2S2DwSBmTUriUWGVtfw"
                     alt="Arij SALEH"
                     className="w-full h-full object-cover"
                   />

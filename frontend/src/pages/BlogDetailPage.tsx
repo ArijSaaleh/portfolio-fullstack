@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import ShareButtons from "../components/ShareButtons";
 import SEOHead from "../components/SEOHead";
 import StructuredData from "../components/StructuredData";
-import { usePageTracking, trackContentView } from "../hooks/useAnalytics";
+
 import { getBlogBySlug, type Blog } from "../services/dataService";
 import { resolveMediaUrl } from "../utils/mediaResolver";
 
@@ -16,17 +16,12 @@ export default function BlogDetailPage() {
   const [blog, setBlog] = useState<Blog | null>(null);
   const [loading, setLoading] = useState(true);
 
-  usePageTracking();
+  
 
   useEffect(() => {
     fetchBlog();
   }, [slug]);
 
-  useEffect(() => {
-    if (blog) {
-      trackContentView("blog", blog.id);
-    }
-  }, [blog]);
 
   const fetchBlog = async () => {
     try {

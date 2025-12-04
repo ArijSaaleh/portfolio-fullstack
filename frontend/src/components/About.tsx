@@ -1,67 +1,122 @@
-import { useEffect, useState } from "react"
-import { Cpu, Cloud, Hammer, GitBranch, Code2, Zap, Award, Lightbulb, Target } from "lucide-react"
-import FadeIn from "./animations/FadeIn"
-import { getProjects, getExperiences } from "../services/dataService"
+import { useEffect, useState } from "react";
+import {
+  Cpu,
+  Cloud,
+  Hammer,
+  GitBranch,
+  Code2,
+  Zap,
+  Award,
+  Lightbulb,
+  Target,
+} from "lucide-react";
+import FadeIn from "./animations/FadeIn";
+import { getProjects, getExperiences } from "../services/dataService";
 
 export default function About() {
   const [stats, setStats] = useState({
     yearsExperience: 2,
     projectsCount: 15,
-    technologiesCount: 10
-  })
+    technologiesCount: 10,
+  });
 
   useEffect(() => {
-    fetchStats()
-  }, [])
+    fetchStats();
+  }, []);
 
   const fetchStats = async () => {
     try {
       const [projects, experiences] = await Promise.all([
         getProjects(true),
-        getExperiences()
-      ])
+        getExperiences(),
+      ]);
 
       // Calculate years of experience
-      let yearsExp = 0
+      let yearsExp = 0;
       if (experiences.length > 0) {
-        const sortedExperiences = experiences.sort((a, b) => 
-          new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
-        )
-        const firstStartDate = new Date(sortedExperiences[0].startDate)
-        const now = new Date()
-        yearsExp = Math.max(1, Math.floor((now.getTime() - firstStartDate.getTime()) / (1000 * 60 * 60 * 24 * 365)))
+        const sortedExperiences = experiences.sort(
+          (a, b) =>
+            new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+        );
+        const firstStartDate = new Date(sortedExperiences[0].startDate);
+        const now = new Date();
+        yearsExp = Math.max(
+          1,
+          Math.floor(
+            (now.getTime() - firstStartDate.getTime()) /
+              (1000 * 60 * 60 * 24 * 365)
+          )
+        );
       }
 
       // Count unique technologies
-      const techSet = new Set<string>()
-      projects.forEach(project => {
-        project.technologies?.forEach(tech => techSet.add(tech.toLowerCase().trim()))
-      })
+      const techSet = new Set<string>();
+      projects.forEach((project) => {
+        project.technologies?.forEach((tech) =>
+          techSet.add(tech.toLowerCase().trim())
+        );
+      });
 
       setStats({
         yearsExperience: yearsExp,
         projectsCount: projects.length,
-        technologiesCount: techSet.size
-      })
+        technologiesCount: techSet.size,
+      });
     } catch (error) {
-      console.error('Error fetching stats:', error)
+      console.error("Error fetching stats:", error);
     }
-  }
+  };
 
   const skills = [
-    { icon: Cpu, name: "Embedded C/C++, RTOS", description: "Low-level programming & real-time systems" },
-    { icon: Cloud, name: "Cloud Platforms", description: "AWS IoT, Azure IoT Hub integration" },
-    { icon: Hammer, name: "Hardware Design", description: "PCB design & circuit prototyping" },
-    { icon: GitBranch, name: "Firmware Development", description: "Bootloaders, drivers, & protocols" },
-    { icon: Code2, name: "Full-Stack Development", description: "React, Node.js, TypeScript, PostgreSQL" },
-    { icon: Zap, name: "IoT Protocols", description: "MQTT, CoAP, LoRaWAN, BLE" },
-  ]
+    {
+      icon: Cpu,
+      name: "Embedded C/C++, RTOS",
+      description: "Low-level programming & real-time systems",
+    },
+    {
+      icon: Cloud,
+      name: "Cloud Platforms",
+      description: "AWS IoT, Azure IoT Hub integration",
+    },
+    {
+      icon: Hammer,
+      name: "Hardware Design",
+      description: "PCB design & circuit prototyping",
+    },
+    {
+      icon: GitBranch,
+      name: "Firmware Development",
+      description: "Bootloaders, drivers, & protocols",
+    },
+    {
+      icon: Code2,
+      name: "Full-Stack Development",
+      description: "React, Node.js, TypeScript, PostgreSQL",
+    },
+    {
+      icon: Zap,
+      name: "IoT Protocols",
+      description: "MQTT, CoAP, LoRaWAN, BLE",
+    },
+  ];
 
   const highlights = [
-    { icon: Target, title: "Strategic Thinker", description: "Chess-inspired approach to problem-solving" },
-    { icon: Lightbulb, title: "Innovation Driven", description: "Turning ideas into impactful solutions" },
-    { icon: Award, title: "Results Focused", description: "Delivering quality with precision" },
-  ]
+    {
+      icon: Target,
+      title: "Strategic Thinker",
+      description: "Chess-inspired approach to problem-solving",
+    },
+    {
+      icon: Lightbulb,
+      title: "Innovation Driven",
+      description: "Turning ideas into impactful solutions",
+    },
+    {
+      icon: Award,
+      title: "Results Focused",
+      description: "Delivering quality with precision",
+    },
+  ];
 
   return (
     <section id="about" className="py-20 bg-muted/30 dark:bg-muted/10">
@@ -72,7 +127,7 @@ export default function About() {
             <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
           </div>
         </FadeIn>
-        
+
         <div className="grid lg:grid-cols-2 gap-12 mb-16">
           {/* Left: Bio */}
           <FadeIn direction="left" delay={200}>
@@ -82,22 +137,29 @@ export default function About() {
                   Creative. Visionary. Strategic.
                 </h3>
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  I'm an <span className="text-foreground font-semibold">IoT & Embedded Software Engineer</span> with 
-                  a unique background in competitive chess. This strategic mindset fuels my approach to engineering thinking 
-                  several steps ahead, anticipating challenges, and architecting elegant solutions.
+                  I'm an{" "}
+                  <span className="text-foreground font-semibold">
+                    IoT & Embedded Software Engineer
+                  </span>{" "}
+                  with a unique background in competitive chess. This strategic
+                  mindset fuels my approach to engineering thinking several
+                  steps ahead, anticipating challenges, and architecting elegant
+                  solutions.
                 </p>
               </div>
 
               <p className="text-muted-foreground text-lg leading-relaxed">
-                My passion lies in bridging the physical and digital worlds through innovative embedded systems. 
-                From low-level firmware to cloud-connected IoT platforms, I architect complete solutions that 
-                transform ideas into reality.
+                My passion lies in bridging the physical and digital worlds
+                through innovative embedded systems. From low-level firmware to
+                cloud-connected IoT platforms, I architect complete solutions
+                that transform ideas into reality.
               </p>
 
               <div className="bg-primary/5 dark:bg-primary/10 border-l-4 border-primary p-6 rounded-r-lg">
                 <p className="text-foreground italic">
-                  "Like a chess grandmaster visualizes moves ahead, I design systems with foresight, 
-                  scalability, and precision—ensuring every component works in perfect harmony."
+                  "Like a chess grandmaster visualizes moves ahead, I design
+                  systems with foresight, scalability, and precision—ensuring
+                  every component works in perfect harmony."
                 </p>
               </div>
 
@@ -110,8 +172,12 @@ export default function About() {
                         <highlight.icon className="w-6 h-6 text-primary" />
                       </div>
                       <div>
-                        <h4 className="font-bold text-lg mb-1">{highlight.title}</h4>
-                        <p className="text-muted-foreground text-sm">{highlight.description}</p>
+                        <h4 className="font-bold text-lg mb-1">
+                          {highlight.title}
+                        </h4>
+                        <p className="text-muted-foreground text-sm">
+                          {highlight.description}
+                        </p>
                       </div>
                     </div>
                   </FadeIn>
@@ -136,7 +202,9 @@ export default function About() {
                           <h5 className="font-bold text-lg mb-1 group-hover:text-primary transition-colors">
                             {skill.name}
                           </h5>
-                          <p className="text-muted-foreground text-sm">{skill.description}</p>
+                          <p className="text-muted-foreground text-sm">
+                            {skill.description}
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -151,20 +219,26 @@ export default function About() {
         <FadeIn delay={600}>
           <div className="grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
             <div className="text-center p-6 bg-background border border-border rounded-lg">
-              <div className="text-4xl font-bold text-primary mb-2">{stats.yearsExperience}+</div>
+              <div className="text-4xl font-bold text-primary mb-2">
+                {stats.yearsExperience}+
+              </div>
               <div className="text-muted-foreground">Years Experience</div>
             </div>
             <div className="text-center p-6 bg-background border border-border rounded-lg">
-              <div className="text-4xl font-bold text-primary mb-2">{stats.projectsCount}+</div>
+              <div className="text-4xl font-bold text-primary mb-2">
+                {stats.projectsCount}+
+              </div>
               <div className="text-muted-foreground">Projects Completed</div>
             </div>
             <div className="text-center p-6 bg-background border border-border rounded-lg">
-              <div className="text-4xl font-bold text-primary mb-2">{stats.technologiesCount}+</div>
+              <div className="text-4xl font-bold text-primary mb-2">
+                {stats.technologiesCount}+
+              </div>
               <div className="text-muted-foreground">Technologies Mastered</div>
             </div>
           </div>
         </FadeIn>
       </div>
     </section>
-  )
+  );
 }

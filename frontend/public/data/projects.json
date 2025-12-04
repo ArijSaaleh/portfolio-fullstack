@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "title": "Example Project",
+    "title": "Securing ESP32 MQTT with TLS (MQTTS)",
     "description": "<p>A sample project showcasing the capabilities</p>",
     "challenge": "The main challenge was to create an efficient solution...",
     "contribution": "I developed the core algorithms and implemented...",

@@ -93,7 +93,7 @@ export default function Experience() {
                           <CardTitle className="text-xl mb-1">
                             {exp.position}
                           </CardTitle>
-                          <CardDescription className="space-y-1">
+                          <div className="space-y-1 text-sm text-muted-foreground">
                             <div className="flex items-center gap-2 font-semibold text-foreground">
                               <Briefcase className="w-4 h-4" />
                               {exp.company}
@@ -112,15 +112,28 @@ export default function Experience() {
                                 {exp.location}
                               </div>
                             )}
-                          </CardDescription>
+                          </div>
                         </div>
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <div 
-                        className="text-foreground mb-4 leading-relaxed prose prose-sm max-w-none"
-                        dangerouslySetInnerHTML={{ __html: exp.description }}
-                      />
+                      {Array.isArray(exp.description) ? (
+                        <ul className="list-disc pl-5 space-y-2 mb-4 text-foreground prose-sm max-w-none">
+                          {exp.description.map((item, i) => (
+                            <li
+                              key={i}
+                              dangerouslySetInnerHTML={{ __html: item }}
+                            />
+                          ))}
+                        </ul>
+                      ) : (
+                        <div
+                          className="text-foreground mb-4 leading-relaxed prose prose-sm max-w-none"
+                          dangerouslySetInnerHTML={{
+                            __html: (exp.description as string) || "",
+                          }}
+                        />
+                      )}
                       {exp.skills && exp.skills.length > 0 && (
                         <div className="flex flex-wrap gap-2">
                           {exp.skills.map((skill, idx) => (

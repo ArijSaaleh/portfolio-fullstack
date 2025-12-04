@@ -47,7 +47,7 @@ export interface Experience {
   startDate: string;
   endDate?: string;
   current: boolean;
-  description: string;
+  description: string | string[];
   skills: string[];
 }
 
