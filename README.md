@@ -14,13 +14,7 @@ Perfect for developers, engineers, and professionals who want a customizable, da
 - **React Router** for navigation
 - **Axios** for API calls
 
-### Backend
-- **Node.js** with Express
-- **TypeScript** for type safety
-- **PostgreSQL** database
-- **Prisma ORM** for database management
-- **JWT** for authentication
-- **bcryptjs** for password hashing
+> Note: This repository has been simplified to a frontend-only project. The original Node.js backend was removed — data is now served from static JSON files in `frontend/public/data/`.
 
 ## 📁 Project Structure
 
@@ -35,15 +29,16 @@ portfolio-fullstack/
 │   ├── package.json
 │   └── vite.config.ts
 │
-├── backend/                  # Node.js backend API
-│   ├── src/
-│   │   ├── routes/          # API routes
-│   │   ├── middleware/      # Express middleware
-│   │   └── server.ts
-│   ├── prisma/
-│   │   └── schema.prisma    # Database schema
-│   ├── package.json
-│   └── tsconfig.json
+```
+└── frontend/                 # React frontend application (single deploy)
+  ├── src/
+  │   ├── components/      # Reusable React components
+  │   ├── pages/           # Page components
+  │   ├── lib/             # Utility functions
+  │   └── App.tsx
+  ├── package.json
+  └── vite.config.ts
+```
 │
 └── README.md
 ```
@@ -61,36 +56,11 @@ git clone <your-repo-url>
 cd portfolio-fullstack
 ```
 
-### 2. Backend Setup
+> There is no backend to set up — the app reads static JSON from `frontend/public/data/`.
 
-```bash
-cd backend
+If you previously relied on a backend, migrate your data into JSON files under `frontend/public/data/` (examples are provided in that folder).
 
-# Install dependencies
-npm install
-
-# Create .env file
-cp .env.example .env
-
-# Edit .env with your PostgreSQL credentials:
-# DATABASE_URL="postgresql://username:password@localhost:5432/portfolio_db"
-# JWT_SECRET="your-super-secret-jwt-key"
-# PORT=3000
-
-# Generate Prisma Client
-npm run prisma:generate
-
-# Run database migrations
-npm run prisma:migrate
-
-# (Optional) Open Prisma Studio to view/edit database
-npm run prisma:studio
-
-# Start development server
-npm run dev
-```
-
-### 3. Frontend Setup
+### Frontend Setup
 
 ```bash
 cd frontend
@@ -102,7 +72,7 @@ npm install
 npm run dev
 ```
 
-The frontend will run on `http://localhost:5173` and backend on `http://localhost:3000`
+The frontend will run on `http://localhost:5173`.
 
 ## 📝 Database Setup
 
@@ -217,21 +187,7 @@ npm run build
 VITE_API_URL=https://your-backend-url.com
 ```
 
-### Backend Deployment (Railway/Render/Heroku)
-
-1. Set environment variables:
-```
-DATABASE_URL=your-production-postgresql-url
-JWT_SECRET=your-production-secret
-PORT=3000
-```
-
-2. Build and start:
-```bash
-cd backend
-npm run build
-npm start
-```
+> Backend deployment instructions removed (this repo no longer contains a backend).
 
 ### Database Deployment
 
@@ -243,12 +199,7 @@ Use services like:
 
 ## 📚 Environment Variables
 
-### Backend `.env`
-```env
-PORT=3000
-DATABASE_URL="postgresql://username:password@localhost:5432/portfolio_db"
-JWT_SECRET="your-super-secret-jwt-key-change-this-in-production"
-```
+> Backend environment variable examples removed.
 
 ### Frontend `.env` (optional)
 ```env
