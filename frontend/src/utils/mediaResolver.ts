@@ -22,7 +22,7 @@ interface MediaOptions {
 export function resolveMediaUrl(url: string, options: MediaOptions = {}): string {
   if (!url) return '';
 
-  const { type = 'image', size = 'large' } = options;
+  const { type = 'image' } = options;
 
   // Handle local files (relative to public folder)
   if (url.startsWith('local:')) {
@@ -32,19 +32,19 @@ export function resolveMediaUrl(url: string, options: MediaOptions = {}): string
   // Handle Google Drive file IDs
   if (url.startsWith('drive://')) {
     const fileId = url.replace('drive://', '');
-    return getDriveUrl(fileId, type, size);
+    return getDriveUrl(fileId, type);
   }
 
   // Handle full Google Drive URLs
   const driveMatch = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
   if (driveMatch) {
-    return getDriveUrl(driveMatch[1], type, size);
+    return getDriveUrl(driveMatch[1], type);
   }
 
   // Handle Google Drive sharing links (view?id= format)
   const driveIdMatch = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
   if (driveIdMatch && url.includes('drive.google.com')) {
-    return getDriveUrl(driveIdMatch[1], type, size);
+    return getDriveUrl(driveIdMatch[1], type);
   }
 
   // Return direct URLs as-is
@@ -54,7 +54,7 @@ export function resolveMediaUrl(url: string, options: MediaOptions = {}): string
 /**
  * Converts Google Drive file ID to accessible URL
  */
-function getDriveUrl(fileId: string, type: MediaType, size: string): string {
+function getDriveUrl(fileId: string, type: MediaType): string {
   // For PDFs, use preview mode for embedding
   if (type === 'pdf') {
     return `https://drive.google.com/file/d/${fileId}/preview`;
