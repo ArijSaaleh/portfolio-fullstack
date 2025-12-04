@@ -1,21 +1,9 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios'
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 import { Button } from './ui/button'
 import { Award, Calendar, ExternalLink, Play, ChevronLeft, ChevronRight } from 'lucide-react'
-import { API_URL } from '../config'
-
-interface Achievement {
-  id: number
-  title: string
-  description: string
-  category: 'award' | 'participation' | 'certification' | 'social'
-  date: string
-  images: string[]
-  videoUrl?: string
-  link?: string
-  published: boolean
-}
+import { getAchievements, type Achievement } from '../services/dataService'
+import { resolveMediaUrl } from '../utils/mediaResolver'
 
 export default function Achievements() {
   const [achievements, setAchievements] = useState<Achievement[]>([])
@@ -27,31 +15,10 @@ export default function Achievements() {
     fetchAchievements()
   }, [])
 
-  // Convert Google Drive URL to direct image URL
-  const getImageUrl = (url: string) => {
-    if (!url) return url;
-    
-    // Check if it's a Google Drive link
-    const driveMatch = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
-    if (driveMatch) {
-      // Convert to direct image URL
-      return `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=w1000`;
-    }
-    
-    // Check if it's already a direct link or thumbnail link
-    if (url.includes('drive.google.com/thumbnail') || url.includes('drive.google.com/uc?')) {
-      return url;
-    }
-    
-    // Return original URL for other sources
-    return url;
-  };
-
   const fetchAchievements = async () => {
     try {
-      const response = await axios.get(`${API_URL}/api/achievements`)
-      const published = response.data.filter((a: Achievement) => a.published)
-      setAchievements(published)
+      const data = await getAchievements(true)
+      setAchievements(data)
     } catch (error) {
       console.error('Error fetching achievements:', error)
       setAchievements([])
@@ -135,7 +102,7 @@ export default function Achievements() {
               {achievement.images && achievement.images.length > 0 && (
                 <div className="aspect-video overflow-hidden bg-muted relative group">
                   <img
-                    src={getImageUrl(achievement.images[currentImageIndex[achievement.id] || 0])}
+                    src={resolveMediaUrl(achievement.images[currentImageIndex[achievement.id] || 0])}
                     alt={achievement.title}
                     className="w-full h-full object-cover transition-transform"
                   />

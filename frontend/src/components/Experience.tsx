@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import {
   Card,
   CardContent,
@@ -8,20 +7,8 @@ import {
   CardTitle,
 } from "./ui/card";
 import { Briefcase, Calendar, MapPin } from "lucide-react";
-import { API_URL } from "../config";
-
-interface Experience {
-  id: number;
-  company: string;
-  companyLogo?: string;
-  position: string;
-  location?: string;
-  startDate: string;
-  endDate?: string;
-  description: string;
-  skills: string[];
-  current: boolean;
-}
+import { getExperiences, type Experience } from "../services/dataService";
+import { resolveMediaUrl } from "../utils/mediaResolver";
 
 export default function Experience() {
   const [experiences, setExperiences] = useState<Experience[]>([]);
@@ -33,8 +20,8 @@ export default function Experience() {
 
   const fetchExperiences = async () => {
     try {
-      const response = await axios.get(`${API_URL}/api/experiences`);
-      setExperiences(response.data);
+      const data = await getExperiences();
+      setExperiences(data);
     } catch (error) {
       console.error("Error fetching experiences:", error);
       setExperiences([]);
@@ -97,7 +84,7 @@ export default function Experience() {
                       <div className="flex items-start gap-4">
                         {exp.companyLogo && (
                           <img
-                            src={exp.companyLogo}
+                            src={resolveMediaUrl(exp.companyLogo)}
                             alt={exp.company}
                             className="w-12 h-12 object-contain rounded"
                           />

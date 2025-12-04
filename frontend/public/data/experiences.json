@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "company": "Tech Company Inc.",
+    "companyLogo": "local:/images/logos/company1.png",
+    "position": "Senior Software Engineer",
+    "location": "San Francisco, CA",
+    "startDate": "2022-01-01",
+    "endDate": "",
+    "current": true,
+    "description": "Led development of key features and mentored junior developers",
+    "skills": ["React", "Node.js", "TypeScript", "AWS"]
+  }
+]

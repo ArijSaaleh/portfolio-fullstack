@@ -8,29 +8,13 @@ import FadeIn from "../components/animations/FadeIn"
 import ShareButtons from "../components/ShareButtons"
 import SEOHead from "../components/SEOHead"
 import StructuredData from "../components/StructuredData"
-import axios from "axios"
 import { usePageTracking, trackContentView } from "../hooks/useAnalytics"
-import { API_URL } from "../config"
-
-interface ProjectDetail {
-  id: number
-  title: string
-  description: string
-  challenge: string
-  contribution: string
-  technologies: string[]
-  heroImage: string
-  videoUrl?: string
-  githubUrl?: string
-  liveUrl?: string
-  accuracy?: string
-  speed?: string
-  images: string[]
-}
+import { getProjectById, type Project } from "../services/dataService"
+import { resolveMediaUrl } from "../utils/mediaResolver"
 
 export default function ProjectDetailPage() {
   const { id } = useParams()
-  const [project, setProject] = useState<ProjectDetail | null>(null)
+  const [project, setProject] = useState<Project | null>(null)
   const [loading, setLoading] = useState(true)
   
   usePageTracking()
@@ -45,46 +29,13 @@ export default function ProjectDetailPage() {
     }
   }, [project])
 
-  // Convert Google Drive URL to direct image URL
-  const getImageUrl = (url: string) => {
-    if (!url) return url;
-    
-    // Check if it's a Google Drive link
-    const driveMatch = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
-    if (driveMatch) {
-      // Convert to direct image URL
-      return `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=w1000`;
-    }
-    
-    // Check if it's already a direct link or thumbnail link
-    if (url.includes('drive.google.com/thumbnail') || url.includes('drive.google.com/uc?')) {
-      return url;
-    }
-    
-    // Return original URL for other sources
-    return url;
-  };
-
   const fetchProjectDetail = async () => {
     try {
-      const response = await axios.get(`${API_URL}/api/projects/${id}`)
-      setProject(response.data)
+      const data = await getProjectById(Number(id))
+      setProject(data)
     } catch (error) {
       console.error('Error fetching project detail:', error)
-      // Fallback data
-      setProject({
-        id: Number(id),
-        title: "Automated Drone Navigation",
-        description: "Connected task planning in network",
-        challenge: "The increasing demand for efficient and safe aerial inspections and deliveries highlighted a critical need for autonomous drone navigation in complex, dynamic environments. Traditional GPS-based systems often struggle with accuracy in urban canyons or indoor settings, while manual control is resource-intensive and prone to human error.",
-        contribution: "As the lead embedded software engineer, I designed and implemented the core real-time operating system (RTOS) logic and the drone's flight control algorithms. My work focused on integrating sensor fusion (LiDAR, IMU, GPS, Vision) to achieve highly accurate localization and obstacle avoidance. I developed custom computer vision algorithms for visual odometry and object detection, enabling the drone to map its environment and plan optimal, collision-free paths in real-time.",
-        technologies: ["C++", "FreeRTOS", "Computer Vision (OpenCV)", "LiDAR & GPS", "Custom PCB Design", "Embedded Linux"],
-        heroImage: "/placeholder-project.jpg",
-        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-        accuracy: "98%",
-        speed: "20x faster than manual",
-        images: ["/placeholder-project.jpg", "/placeholder-project.jpg", "/placeholder-project.jpg"]
-      })
+      setProject(null)
     } finally {
       setLoading(false)
     }
@@ -188,7 +139,7 @@ export default function ProjectDetailPage() {
               </div>
             </div>
             <div>
-              <img src={getImageUrl(project.heroImage)} alt={project.title} className="w-full rounded-2xl shadow-md" />
+              <img src={resolveMediaUrl(project.heroImage || project.thumbnail)} alt={project.title} className="w-full rounded-2xl shadow-md" />
             </div>
           </div>
         </div>
@@ -201,7 +152,7 @@ export default function ProjectDetailPage() {
                 <h4 className="text-2xl font-bold mb-4 border-b-2 border-border pb-2">The Challenge</h4>
               <div 
                 className="text-foreground leading-relaxed text-lg prose max-w-none"
-                dangerouslySetInnerHTML={{ __html: project.challenge }}
+                dangerouslySetInnerHTML={{ __html: project.challenge || '' }}
               />
               </section>
             </FadeIn>
@@ -211,7 +162,7 @@ export default function ProjectDetailPage() {
                 <h4 className="text-2xl font-bold mb-4 border-b-2 border-border pb-2">My Contribution</h4>
                 <div 
                   className="text-foreground leading-relaxed text-lg prose max-w-none"
-                  dangerouslySetInnerHTML={{ __html: project.contribution }}
+                  dangerouslySetInnerHTML={{ __html: project.contribution || '' }}
                 />
               </section>
             </FadeIn>
@@ -277,7 +228,7 @@ export default function ProjectDetailPage() {
                   {project.images.map((image, index) => (
                     <img 
                       key={index}
-                      src={getImageUrl(image)} 
+                      src={resolveMediaUrl(image)} 
                       alt={`Project screenshot ${index + 1}`}
                       className="w-full h-24 object-cover rounded-lg shadow hover:scale-105 transition-transform cursor-pointer"
                     />

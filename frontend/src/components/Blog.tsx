@@ -6,66 +6,17 @@ import SearchBar from "./SearchBar"
 import FilterBar from "./FilterBar"
 import SkeletonCard from "./loaders/SkeletonCard"
 import FadeIn from "./animations/FadeIn"
-import axios from "axios"
 import { Calendar, Clock } from "lucide-react"
-import { API_URL } from "../config"
+import { getBlogs, type Blog } from "../services/dataService"
+import { resolveMediaUrl } from "../utils/mediaResolver"
 
-interface BlogPost {
-  id: number
-  title: string
-  excerpt: string
-  slug: string
-  thumbnail: string
-  pdfUrl?: string
-  publishedAt: string
-  readTime: string
-  type: 'article' | 'video' | 'tutorial'
-  published: boolean
-}
-
-export default function Blog() {
+export default function BlogComponent() {
   const navigate = useNavigate()
-  const [posts, setPosts] = useState<BlogPost[]>([])
+  const [posts, setPosts] = useState<Blog[]>([])
   const [loading, setLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedType, setSelectedType] = useState("all")
   const [sortBy, setSortBy] = useState("date")
-
-  // Convert Google Drive URL to embeddable format (for PDFs)
-  const getEmbedUrl = (url: string) => {
-    if (!url) return url;
-    
-    const driveMatch = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
-    if (driveMatch) {
-      return `https://drive.google.com/file/d/${driveMatch[1]}/preview`;
-    }
-    
-    if (url.includes('drive.google.com') && url.includes('/preview')) {
-      return url;
-    }
-    
-    return url;
-  };
-
-  // Convert Google Drive URL to direct image URL (for thumbnails)
-  const getImageUrl = (url: string) => {
-    if (!url) return url;
-    
-    // Check if it's a Google Drive link
-    const driveMatch = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
-    if (driveMatch) {
-      // Convert to direct image URL
-      return `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=w1000`;
-    }
-    
-    // Check if it's already a direct link or thumbnail link
-    if (url.includes('drive.google.com/thumbnail') || url.includes('drive.google.com/uc?')) {
-      return url;
-    }
-    
-    // Return original URL for other sources
-    return url;
-  };
 
   useEffect(() => {
     fetchPosts()
@@ -73,10 +24,8 @@ export default function Blog() {
 
   const fetchPosts = async () => {
     try {
-      const response = await axios.get(`${API_URL}/api/blogs`)
-      // Filter only published posts
-      const publishedPosts = response.data.filter((post: BlogPost) => post.published)
-      setPosts(publishedPosts)
+      const data = await getBlogs(true) // Only published
+      setPosts(data)
     } catch (error) {
       console.error('Error fetching blog posts:', error)
       setPosts([])
@@ -197,14 +146,14 @@ export default function Blog() {
                   <div className="aspect-video overflow-hidden bg-muted relative">
                     {post.thumbnail ? (
                       <img 
-                        src={getImageUrl(post.thumbnail)} 
+                        src={resolveMediaUrl(post.thumbnail)}
                         alt={post.title}
                         className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                       />
                     ) : post.pdfUrl ? (
                       <div className="w-full h-full relative">
                         <iframe
-                          src={getEmbedUrl(post.pdfUrl)}
+                          src={resolveMediaUrl(post.pdfUrl, { type: 'pdf' })}
                           className="w-full h-[120%] absolute -top-2 pointer-events-none scale-105"
                           title={`${post.title} PDF preview`}
                           style={{ border: 'none' }}

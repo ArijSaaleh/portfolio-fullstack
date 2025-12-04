@@ -3,8 +3,7 @@ import { Button } from "./ui/button"
 import { Input } from "./ui/input"
 import { Textarea } from "./ui/textarea"
 import { Linkedin, Mail, Github } from "lucide-react"
-import axios from "axios"
-import { API_URL } from "../config"
+import { saveMessage } from "../services/dataService"
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -21,7 +20,7 @@ export default function Contact() {
     setSubmitStatus('idle')
 
     try {
-      await axios.post(`${API_URL}/api/contact`, formData)
+      await saveMessage(formData)
       setSubmitStatus('success')
       setFormData({ name: "", email: "", message: "" })
     } catch (error) {

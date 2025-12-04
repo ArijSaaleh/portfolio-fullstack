@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { ArrowLeft, Calendar, Clock, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -8,22 +7,8 @@ import ShareButtons from "../components/ShareButtons";
 import SEOHead from "../components/SEOHead";
 import StructuredData from "../components/StructuredData";
 import { usePageTracking, trackContentView } from "../hooks/useAnalytics";
-import { API_URL } from "../config";
-
-interface Blog {
-  id: number;
-  title: string;
-  excerpt: string;
-  content: string;
-  slug: string;
-  type: string;
-  readTime: number;
-  videoUrl?: string;
-  pdfUrl?: string;
-  image: string;
-  publishedAt: string;
-  thumbnail?: string;
-}
+import { getBlogBySlug, type Blog } from "../services/dataService";
+import { resolveMediaUrl } from "../utils/mediaResolver";
 
 export default function BlogDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -32,45 +17,6 @@ export default function BlogDetailPage() {
   const [loading, setLoading] = useState(true);
 
   usePageTracking();
-
-  // Convert Google Drive URL to embeddable format (for PDFs)
-  const getEmbedUrl = (url: string) => {
-    if (!url) return url;
-    
-    // Check if it's a Google Drive link
-    const driveMatch = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
-    if (driveMatch) {
-      return `https://drive.google.com/file/d/${driveMatch[1]}/preview`;
-    }
-    
-    // Check if it's already a preview link
-    if (url.includes('drive.google.com') && url.includes('/preview')) {
-      return url;
-    }
-    
-    // Return original URL for other sources
-    return url;
-  };
-
-  // Convert Google Drive URL to direct image URL (for thumbnails)
-  const getImageUrl = (url: string) => {
-    if (!url) return url;
-    
-    // Check if it's a Google Drive link
-    const driveMatch = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
-    if (driveMatch) {
-      // Convert to direct image URL
-      return `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=w1000`;
-    }
-    
-    // Check if it's already a direct link or thumbnail link
-    if (url.includes('drive.google.com/thumbnail') || url.includes('drive.google.com/uc?')) {
-      return url;
-    }
-    
-    // Return original URL for other sources
-    return url;
-  };
 
   useEffect(() => {
     fetchBlog();
@@ -84,8 +30,7 @@ export default function BlogDetailPage() {
 
   const fetchBlog = async () => {
     try {
-      const response = await axios.get(`${API_URL}/api/blogs`);
-      const foundBlog = response.data.find((b: Blog) => b.slug === slug);
+      const foundBlog = await getBlogBySlug(slug!);
 
       if (foundBlog) {
         setBlog(foundBlog);
@@ -136,7 +81,6 @@ export default function BlogDetailPage() {
   const currentUrl = typeof window !== "undefined" ? window.location.href : "";
   const blogImage =
     blog.thumbnail ||
-    blog.image ||
     (blog.pdfUrl ? `${blog.pdfUrl}#page=1` : "");
 
   return (
@@ -177,11 +121,11 @@ export default function BlogDetailPage() {
 
       {/* Blog content */}
       <main className="container mx-auto px-4 py-12 max-w-6xl">
-        {/* Hero image - only if not PDF */}
-        {blog.image && !blog.pdfUrl && (
-          <div className="mb-8 rounded-lg overflow-hidden bg-muted">
+        {/* Hero image or thumbnail */}
+        {blog.thumbnail && !blog.pdfUrl && (
+          <div className="mb-8 rounded-lg overflow-hidden">
             <img
-              src={getImageUrl(blog.image)}
+              src={resolveMediaUrl(blog.thumbnail)}
               alt={blog.title}
               className="w-full h-[400px] object-cover"
             />
@@ -374,7 +318,7 @@ export default function BlogDetailPage() {
               </div>
               <div className="h-[800px] bg-muted">
                 <iframe
-                  src={getEmbedUrl(blog.pdfUrl)}
+                  src={resolveMediaUrl(blog.pdfUrl, { type: 'pdf' })}
                   title={`${blog.title} PDF`}
                   className="w-full h-full"
                   style={{ border: "none" }}

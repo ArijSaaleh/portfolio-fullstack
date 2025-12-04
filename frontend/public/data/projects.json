@@ -1,0 +1,25 @@
+[
+  {
+    "id": 1,
+    "title": "Example Project",
+    "description": "<p>A sample project showcasing the capabilities</p>",
+    "challenge": "The main challenge was to create an efficient solution...",
+    "contribution": "I developed the core algorithms and implemented...",
+    "technologies": ["React", "TypeScript", "Node.js"],
+    "thumbnail": "local:/images/projects/project1-thumb.jpg",
+    "heroImage": "local:/images/projects/project1-hero.jpg",
+    "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "githubUrl": "https://github.com/username/project",
+    "liveUrl": "https://project-demo.com",
+    "accuracy": "95%",
+    "speed": "2x faster",
+    "images": [
+      "local:/images/projects/project1-1.jpg",
+      "drive://1ABC123DEF456GHI789JKL",
+      "https://example.com/image.jpg"
+    ],
+    "startDate": "2024-01-01",
+    "endDate": "2024-06-01",
+    "published": true
+  }
+]

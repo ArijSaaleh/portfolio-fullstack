@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "title": "Getting Started with React",
+    "slug": "getting-started-with-react",
+    "excerpt": "Learn the basics of React development",
+    "content": "<h2>Introduction</h2><p>React is a powerful library...</p>",
+    "thumbnail": "local:/images/blogs/react-thumb.jpg",
+    "type": "article",
+    "readTime": "5 min read",
+    "videoUrl": "",
+    "pdfUrl": "drive://1XYZ789ABC123DEF456GHI",
+    "publishedAt": "2024-01-15",
+    "published": true
+  }
+]

@@ -1,21 +1,7 @@
 import { useEffect, useState } from "react"
 import { Cpu, Cloud, Hammer, GitBranch, Code2, Zap, Award, Lightbulb, Target } from "lucide-react"
 import FadeIn from "./animations/FadeIn"
-import axios from "axios"
-import { API_URL } from "../config"
-
-interface Project {
-  id: number
-  technologies: string[]
-  published: boolean
-}
-
-interface Experience {
-  id: number
-  startDate: string
-  endDate?: string
-  current: boolean
-}
+import { getProjects, getExperiences } from "../services/dataService"
 
 export default function About() {
   const [stats, setStats] = useState({
@@ -30,13 +16,10 @@ export default function About() {
 
   const fetchStats = async () => {
     try {
-      const [projectsRes, experiencesRes] = await Promise.all([
-        axios.get(`${API_URL}/api/projects`),
-        axios.get(`${API_URL}/api/experiences`)
+      const [projects, experiences] = await Promise.all([
+        getProjects(true),
+        getExperiences()
       ])
-
-      const projects: Project[] = projectsRes.data.filter((p: Project) => p.published)
-      const experiences: Experience[] = experiencesRes.data
 
       // Calculate years of experience
       let yearsExp = 0

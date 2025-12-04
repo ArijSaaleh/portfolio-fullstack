@@ -1,13 +1,16 @@
+import typography from '@tailwindcss/typography';
+
 /** @type {import('tailwindcss').Config} */
-export const darkMode = ["class"];
-export const content = [
+export default {
+  darkMode: ["class"],
+  content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-];
-export const prefix = "";
-export const theme = {
+  ],
+  prefix: "",
+  theme: {
     container: {
         center: true,
         padding: "2rem",
@@ -71,5 +74,6 @@ export const theme = {
             "accordion-up": "accordion-up 0.2s ease-out",
         },
     },
-    plugins : [require('@tailwindcss/typography')],
+  },
+  plugins: [typography],
 };
